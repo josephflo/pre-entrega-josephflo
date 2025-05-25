@@ -13,6 +13,10 @@ public class Articulo {
     public int getId() {
         return id;
     }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
 
     // Getter para el atributo nombre
     public String getNombre() {

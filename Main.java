@@ -3,11 +3,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
     static ArrayList<Articulo> lista = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int opcion;
+        int opcion = 0;
         do {
             System.out.println("\n--- Menú de Artículos ---");
             System.out.println("1. Crear artículo");
@@ -16,8 +17,14 @@ public class Main {
             System.out.println("4. Eliminar artículo");
             System.out.println("5. Salir");
             System.out.print("Seleccione una opción: ");
-            opcion = sc.nextInt();
-            sc.nextLine();
+
+            String entrada = sc.nextLine();
+
+            if (!esEntero(entrada)) {
+                System.out.println("Por favor, ingrese un número válido.");
+                continue; // Saltá el resto del código en esta vuelta del bucle y pasá a la siguiente iteración.
+            }
+            opcion = Integer.parseInt(entrada);
 
             // Estructura switch para manejar las opciones
             switch (opcion) {
@@ -50,9 +57,9 @@ public class Main {
 
             if (buscarArticuloPorId(id) != null) {
                 System.out.println(" El ID ya existe. Ingrese otro.");
-                entradaId = ""; 
+                entradaId = "";
             }
-            
+
         } while (!esEntero(entradaId) || buscarArticuloPorId(Integer.parseInt(entradaId)) != null);
 
         String nombre;
@@ -78,7 +85,7 @@ public class Main {
         // Crear un nuevo objeto Articulo y agregarlo a la lista
         Articulo nuevo = new Articulo(id, nombre, precio);
         lista.add(nuevo);
-        System.out.println("Artículo agregado.");
+        System.out.println("Artículo agregado exitosamente.");
     }
 
     // Método para mostrar todos los artículos de la lista
@@ -144,7 +151,7 @@ public class Main {
         }
     }
 
-     static Articulo buscarArticuloPorId(int id) {
+    static Articulo buscarArticuloPorId(int id) {
         for (Articulo a : lista) {
             if (a.getId() == id) {
                 return a;
